@@ -182,7 +182,7 @@ const float catSwaySpring = 36.0f;
 const float catSwayDamping = 8.0f;
 
 
-// Поправки высоты из-за разных прозрачных полей у поз кота.
+// Height adjustments due to different transparency fields in the cat's poses
 const float catWalkRightOffsetY = (catIdleGroundV - 0.921053f) * catHeight;
 const float catWalkLeftOffsetY = (catIdleGroundV - 0.925837f) * catHeight;
 const float catHappyOffsetY = (catIdleGroundV - 0.937002f) * catHeight;
@@ -193,22 +193,23 @@ float catX = catStartX;
 float catY = catStartY;
 bool catFacingLeft = false;
 
-const float catDrinkDuration = 3.5f; // Время, за которое кот выпивает молоко.
+const float catDrinkDuration = 3.5f; // time for drinking milk 
 const float catDrinkGroundV = 0.919458f;
 const float catDrinkMouthU = 0.750399f;
 const float catDrinkMouthV = 0.737640f;
 const float fullMilkSurfaceY = bowlY + bowlHeight * (1.0f - 0.72f);
 
-// Совмещаем лапы с полом, а кончик языка — с поверхностью молока.
+
+//connect paws with the floor and the tip of the tongue with the surface of the milk
 const float catDrinkHeight = (catGroundY - fullMilkSurfaceY) / (catDrinkGroundV - catDrinkMouthV);
 const float catDrinkWidth = catDrinkHeight;
 const float catDrinkX = bowlX + bowlWidth * 0.5f - catDrinkWidth * catDrinkMouthU;
 const float catDrinkY = catGroundY - catDrinkHeight * catDrinkGroundV;
 
 float catReactionTime = 0.0f;
-const float catHissDuration = 0.6f; // Время, за которое кот издаёт шипящий звук.
-const float catBiteDuration = 0.4f; // Время, за которое кот кусает игрока.
-const float catPetDuration = 1.0f; // Время, за которое кот мурлычет от поглаживания.
+const float catHissDuration = 0.6f; // time for hissing sound
+const float catBiteDuration = 0.4f; // time for bite
+const float catPetDuration = 1.0f; // time for love of cat
 const float catLookDuration = 3.5f;
 
 float catAutoReactionTimer = 0.0f;
@@ -242,14 +243,12 @@ int endProgram(const char* message)
     return -1;
 }
 
-// Проверяем, находится ли курсор внутри прямоугольника (от левого верхнего угла).
-bool mouseInside(double mouseX, double mouseY, float x, float y, float width, float height)
-{
+// check cursor (left corner)
+bool mouseInside(double mouseX, double mouseY, float x, float y, float width, float height){
     return mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
 }
 
-bool getMouseInScene(GLFWwindow* window, double& x, double& y)
-{
+bool getMouseInScene(GLFWwindow* window, double& x, double& y){
     int width, height;
     glfwGetWindowSize(window, &width, &height);
 
@@ -264,7 +263,7 @@ bool getMouseInScene(GLFWwindow* window, double& x, double& y)
     return true;
 }
 
-
+//fun for not copacity
 void loadFurnitireMask(unsigned int texture) {
     glActiveTexture(GL_TEXTURE0);   
     glBindTexture(GL_TEXTURE_2D, texture);
@@ -275,6 +274,7 @@ void loadFurnitireMask(unsigned int texture) {
     furniturePixels.resize(static_cast<size_t>(furniturePixelWidth)*furniturePixelHeight*4);
 
     GLint previousAlignment;
+    //выравнивание строк
     glGetIntegerv(GL_PACK_ALIGNMENT, &previousAlignment);
     glPixelStorei(GL_PACK_ALIGNMENT, 1);
 
@@ -282,6 +282,7 @@ void loadFurnitireMask(unsigned int texture) {
     glPixelStorei(GL_PACK_ALIGNMENT, previousAlignment);
 }
 
+//check is an opaque piece of furniture
 bool furnitureCoverPoint(double x, double y) {
     if (furniturePixels.empty() || x < 0.0 || y < 0.0 || x >= WINDOW_WIDTH || y >= WINDOW_HEIGHT) return false;
 
@@ -350,8 +351,7 @@ void updateMouse(GLFWwindow* window, float deltaTime) {
 }
 
 
-void moveMilkToMouse(double mouseX, double mouseY)
-{
+void moveMilkToMouse(double mouseX, double mouseY){
     milkX = static_cast<float>(mouseX) - grabOffsetX;
     milkY = static_cast<float>(mouseY) - grabOffsetY;
 
@@ -378,8 +378,7 @@ void moveCatToMouse(double mouseX, double mouseY) {
 
 
 
-void updateCatSway(float deltaTime)
-{
+void updateCatSway(float deltaTime){
     if (!draggingCat)
     {
         catSwayAngle = 0.0f;
@@ -398,33 +397,22 @@ void updateCatSway(float deltaTime)
     catSwayPreviousX = catX;
 
     float targetAngle = -speedX * catSwaySensitivity;
+    if (targetAngle > catSwayMaxAngle) targetAngle = catSwayMaxAngle;
+    if (targetAngle < -catSwayMaxAngle) targetAngle = -catSwayMaxAngle;
 
-    if (targetAngle > catSwayMaxAngle)
-        targetAngle = catSwayMaxAngle;
-
-    if (targetAngle < -catSwayMaxAngle)
-        targetAngle = -catSwayMaxAngle;
-
-    // Ограничиваем шаг анимации после возможной паузы.
+    //Limit the animation step
     float simulationTime = deltaTime;
+    if (simulationTime > 0.05f) simulationTime = 0.05f;
 
-    if (simulationTime > 0.05f)
-        simulationTime = 0.05f;
-
-    float acceleration =
-        (targetAngle - catSwayAngle) * catSwaySpring
-        - catSwayVelocity * catSwayDamping;
-
+    float acceleration = (targetAngle - catSwayAngle) * catSwaySpring - catSwayVelocity * catSwayDamping;
     catSwayVelocity += acceleration * simulationTime;
     catSwayAngle += catSwayVelocity * simulationTime;
 
-    if (catSwayAngle > catSwayMaxAngle)
-    {
+    if (catSwayAngle > catSwayMaxAngle){
         catSwayAngle = catSwayMaxAngle;
         catSwayVelocity = 0.0f;
     }
-    else if (catSwayAngle < -catSwayMaxAngle)
-    {
+    else if (catSwayAngle < -catSwayMaxAngle){
         catSwayAngle = -catSwayMaxAngle;
         catSwayVelocity = 0.0f;
     }
@@ -434,29 +422,25 @@ void setRoomLight(GLFWwindow* window, bool lightOn) {
     if (roomLightOn == lightOn)
         return;
 
-    if (!lightOn)
-    {
+    if (!lightOn){
         catStateBeforeSleep = catState;
         catState = CatState::Slepping;
 
         catSleepTimer = 0.0f;
         catSleepEffectVisible = true;
     }
-    else
-    {
+    else{
         catState = catStateBeforeSleep;
     }
 
     roomLightOn = lightOn;
 }
 
-void mouseCallback(GLFWwindow* window, int button, int action, int mods)
-{
+void mouseCallback(GLFWwindow* window, int button, int action, int mods){
     if (button != GLFW_MOUSE_BUTTON_LEFT)
         return;
 
-    if (action == GLFW_PRESS)
-    {
+    if (action == GLFW_PRESS){
         glfwSetCursor(window, cursorClosed);
 
         double mouseX, mouseY;
@@ -493,7 +477,7 @@ void mouseCallback(GLFWwindow* window, int button, int action, int mods)
 		}
 
            
-        // Подбираем уже вынутый пакет.
+        // 
         if (!pouringMilk && milkTaken && mouseInside(mouseX, mouseY,
             milkX, milkY, milkWidth, milkHeight))
         {
@@ -502,7 +486,7 @@ void mouseCallback(GLFWwindow* window, int button, int action, int mods)
             grabOffsetX = static_cast<float>(mouseX) - milkX;
             grabOffsetY = static_cast<float>(mouseY) - milkY;
         }
-        // Берём пакет с полки.
+        //take the bag from the shelf
         else if (fridgeOpen && !milkTaken && mouseInside(mouseX, mouseY, shelfMilkX, shelfMilkY, milkWidth, milkHeight))
         {
             milkTaken = true;
@@ -547,7 +531,7 @@ void mouseCallback(GLFWwindow* window, int button, int action, int mods)
             return;
         }
 
-        // Открываем или закрываем холодильник.
+        // open or close frige.
         else if ( mouseInside(mouseX, mouseY, fridgeX, fridgeY, fridgeWidth, fridgeHeight) ||
             (fridgeOpen && mouseInside(mouseX, mouseY, fridgeX + fridgeWidth, fridgeY, 90.0f, 247.0f))){
 
@@ -625,7 +609,7 @@ void mouseCallback(GLFWwindow* window, int button, int action, int mods)
         if (!getMouseInScene(window, mouseX, mouseY)) return;
         
 
-        // Учитываем точную позицию в момент отпускания milk.
+        // exact position for take milk
         moveMilkToMouse(mouseX, mouseY);
 
         bool milkInsideFridge = mouseInside(
@@ -642,10 +626,9 @@ void mouseCallback(GLFWwindow* window, int button, int action, int mods)
     }
 }
 
-// Рисуем спрайт: его положение и размер указаны в пикселях.
-// Для всех объектов используем один VAO, VBO и шейдер.
-void drawSprite(unsigned int texture, float x, float y, float width, float height, int scaleLocation, int offsetLocation)
-{
+// Draw the sprite: its position and size are specified in pixels.
+// Use the same VAO, VBO, and shader for all objects.
+void drawSprite(unsigned int texture, float x, float y, float width, float height, int scaleLocation, int offsetLocation){
     float scaleX = width / WINDOW_WIDTH;
     float scaleY = height / WINDOW_HEIGHT;
 
@@ -707,11 +690,9 @@ bool loadFont(const char* path, unsigned int pixelSize) {
         glyph.bearingX = face->glyph->bitmap_left;
         glyph.bearingY = face->glyph->bitmap_top;
 
-        glyph.advance =
-            static_cast<float>(face->glyph->advance.x) / 64.0f;
+        glyph.advance = static_cast<float>(face->glyph->advance.x) / 64.0f;
 
-        if (glyph.width > 0 && glyph.height > 0)
-        {
+        if (glyph.width > 0 && glyph.height > 0){
             if (bitmap.pixel_mode != FT_PIXEL_MODE_GRAY)
                 continue;
 
@@ -720,19 +701,12 @@ bool loadFont(const char* path, unsigned int pixelSize) {
                 * glyph.height * 4
             );
 
-            for (int y = 0; y < glyph.height; ++y)
-            {
-                int sourceOffset = bitmap.pitch >= 0
-                    ? y * bitmap.pitch
-                    : (glyph.height - 1 - y) * (-bitmap.pitch);
+            for (int y = 0; y < glyph.height; ++y){
+                int sourceOffset = bitmap.pitch >= 0 ? y * bitmap.pitch : (glyph.height - 1 - y) * (-bitmap.pitch);
+                const unsigned char* row = bitmap.buffer + sourceOffset;
 
-                const unsigned char* row =
-                    bitmap.buffer + sourceOffset;
-
-                for (int x = 0; x < glyph.width; ++x)
-                {
-                    int index =
-                        ((glyph.height - 1 - y) * glyph.width + x) * 4;
+                for (int x = 0; x < glyph.width; ++x){
+                    int index = ((glyph.height - 1 - y) * glyph.width + x) * 4;
 
                     pixels[index] = 245;
                     pixels[index + 1] = 235;
@@ -743,22 +717,12 @@ bool loadFont(const char* path, unsigned int pixelSize) {
 
             glGenTextures(1, &glyph.texture);
             glBindTexture(GL_TEXTURE_2D, glyph.texture);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, glyph.width, glyph.height, 0, GL_RGBA, GL_UNSIGNED_BYTE,pixels.data());
 
-            glTexImage2D(
-                GL_TEXTURE_2D, 0, GL_RGBA8,
-                glyph.width, glyph.height,
-                0, GL_RGBA, GL_UNSIGNED_BYTE,
-                pixels.data()
-            );
-
-            glTexParameteri(
-                GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            glTexParameteri(
-                GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-            glTexParameteri(
-                GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-            glTexParameteri(
-                GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         }
 
         fontGlyphs[static_cast<wchar_t>(code)] = glyph;
@@ -894,7 +858,7 @@ void updatePouringMilk(float deltaTime)
     if (!roomLightOn || !pouringMilk)
         return;
 
-    // Сколько времени молоко уже льётся непосредственно в миску.
+    //how long has the milk been pouring directly into the bowl
     float previousFillTime = pourElapsed - streamFallTime;
     if (previousFillTime < 0.0f)
         previousFillTime = 0.0f;
@@ -912,7 +876,7 @@ void updatePouringMilk(float deltaTime)
         bowlFill = 1.0f;
         pouringMilk = false;
 
-        // После наливания снова ставим пакет рядом с миской.
+        //after pouring, place the bag next to the bowl again
         milkX = bowlX + bowlWidth + 10.0f;
         milkY = bowlY + bowlHeight - milkHeight;
     }
@@ -943,14 +907,14 @@ void updateCat(float deltaTime)
 			catX += step;
             if (catX >= catWalkRightX) {
                 catX = catWalkRightX;
-				catFacingLeft = true; // меняем направление движения кота
+				catFacingLeft = true; // chenge the direction of the cat
             }
         }
         else {
             catX -= step;
             if (catX <= catWalkLeftX) {
                 catX = catWalkLeftX;
-				catFacingLeft = false; // меняем направление движения кота
+				catFacingLeft = false; 
                 catState = CatState::WalkingToBowl;
             }
         }
@@ -1008,7 +972,7 @@ void updateCatReaction(float deltaTime)
 
     if (catState == CatState::Drinking) {
         catReaction = CatReaction::None;
-        catReactionTime = 0.0f; //зачем у нас везде переназначаются время реакции
+        catReactionTime = 0.0f; 
         catBiteAtherHiss = false;
         return;
     }
@@ -1045,7 +1009,7 @@ void updateCatReaction(float deltaTime)
     }
 }
 
-//обработка изменения размеров окна
+//handling window resizing
 void framebufferSizeCallback(GLFWwindow* window, int width, int height){
     glViewport(0, 0, width, height);
 }
@@ -1053,16 +1017,14 @@ void framebufferSizeCallback(GLFWwindow* window, int width, int height){
 
 int main()
 {
-    // Создаем окно
-    
+    //create windiow    
     if (!glfwInit()) return endProgram("GLFW init failed.");
 
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
     catAutoReactionTimer = getRandomCatDelay();
     resetMouse();
 
-    //фулл экран   
-    
+    //фулл экран 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -1070,11 +1032,11 @@ int main()
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
    
 
-	//получаем основной монитор и его видеорежим, чтобы создать окно с правильным разрешением
+	//get the main monitor and its video mode to create a window with the correct resolution
 	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
    
 	if (monitor == NULL) return endProgram("Cannot find monitor.");
-	//текущее разрешение монитора
+	//current monitor resolution
 	const GLFWvidmode* mode = glfwGetVideoMode(monitor);
     if (mode == NULL) return endProgram("Cannot get video mode.");
     
@@ -1095,31 +1057,31 @@ int main()
     );*/
     
 
-	//создаем фулл-окно с разрешением монитора (для фулл)    
+	//create a full-size window with the monitor's resolution (for full-size)
     GLFWwindow* window = glfwCreateWindow(mode->width, mode->height, "Cat Room", monitor, NULL);
     if (window == NULL) return endProgram("Cannot create window.");
     glfwMakeContextCurrent(window);
 
     //glfwMakeContextCurrent(window);
-	//отключаем вертикальную синхронизацию, чтобы не ограничивать FPS
+	//disable vertical sync to avoid limiting FPS
 	glfwSwapInterval(0); // vsync
 
     glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK) return endProgram("GLEW init failed.");
 
-    //размеры фрейма
+    //frame dimensions
 	int framebufferWidth, framebufferHeight;
 	glfwGetFramebufferSize(window, &framebufferWidth, &framebufferHeight);
-    glViewport(0, 0, framebufferWidth, framebufferHeight); //область в которой будет выводиться изображение
+    glViewport(0, 0, framebufferWidth, framebufferHeight); //the area in which the image will be displayed
 
-    //подключение колбека к окну
+    //connecting a callback to a window
     glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
 
-    // Разрешаем прозрачность PNG
+    // allowing PNG transparency
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    // шейдер
+    //shejders
     unsigned int basicShader = createShader("basic.vert", "basic.frag");
 
     
@@ -1280,7 +1242,7 @@ int main()
         freeFont();
         return endProgram("cannot load font");
     }
-    // Получаем uniform-переменные
+    // get uniform-variables
     glUseProgram(basicShader);
 
     glUniform1i(glGetUniformLocation(basicShader, "uTexture"), 0);
@@ -1327,7 +1289,7 @@ int main()
     glUniform1i(drinkingCatLocation, 0);
     
 
-    // Неподвижная пустая миска на ковре справа от начального положения кота.
+    //stationary empty bowl 
     float grabOffsetX = 0.0f;
     float grabOffsetY = 0.0f;
 
@@ -1338,7 +1300,6 @@ int main()
 
    
 
-    // Главный игровой цикл
     while (!glfwWindowShouldClose(window))
     {
 		double frameStartTime = glfwGetTime();
@@ -1351,10 +1312,8 @@ int main()
 
         if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) glfwSetWindowShouldClose(window, GLFW_TRUE);
 
-    
-        // Каждый кадр перемещаем уже захваченный пакет.
-        if (draggingMilk)
-        {
+            
+        if (draggingMilk) {
             double mouseX, mouseY;
 
             if (getMouseInScene(window, mouseX, mouseY))
@@ -1367,7 +1326,7 @@ int main()
 
 
         
-        // Клавиша R сбрасывает состояние холодильника и молока.
+        // R
         if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
         {
             roomLightOn = false;
@@ -1431,7 +1390,7 @@ int main()
         glActiveTexture(GL_TEXTURE0);
         glBindVertexArray(VAO);
 
-        // Сначала рисуем фон
+        // draw the background
         glUniform2f(scaleLocation, 1.0f, 1.0f);
         glUniform2f(offsetLocation, 0.0f, 0.0f);
 
@@ -1533,8 +1492,7 @@ int main()
 			drawSprite(heartTexture, heartX, heartY, heartSize, heartSize, scaleLocation, offsetLocation);
 		}
 
-        if (catState !=CatState::Slepping && (catReaction == CatReaction::Hissing || catReaction == CatReaction::Biting))
-        {
+        if (catState !=CatState::Slepping && (catReaction == CatReaction::Hissing || catReaction == CatReaction::Biting)) {
             const float angerSize = 52.0f;
             float angerX = catX + catWidth * 0.5f - angerSize * 0.5f;
             float angerY = catY + catHeight * 0.1f - angerSize;
@@ -1542,29 +1500,28 @@ int main()
         }
         
         
-        // Миска стоит на полу и рисуется перед котом при перекрытии спрайтов.
+        //bowl is on the floor and is drawn in front of the cat when the sprites overlap
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, bowlInteriorMaskTexture);
 
         glActiveTexture(GL_TEXTURE2);
         glBindTexture(GL_TEXTURE_2D, bowlFrontMaskTexture);
 
-        // drawSprite привязывает основную картинку к активному блоку.
+       
         glActiveTexture(GL_TEXTURE0);
 
         glUniform1i(bowlModeLocation, 1);
         glUniform1f(bowlFillLocation, bowlFill);
 
-        drawSprite(bowlTexture, bowlX, bowlY, bowlWidth, bowlHeight, scaleLocation, offsetLocation);
-
-        // Следующие объекты рисуем обычным способом.
+        // drawSprite binds the main image to the active block
+        drawSprite(bowlTexture, bowlX, bowlY, bowlWidth, bowlHeight, scaleLocation, offsetLocation);        
         glUniform1i(bowlModeLocation, 0);
 
 
 
         if (catState == CatState::Drinking)
         {
-            // Исходная миска нужна для проверки её прозрачных полей.
+            //original bowl is needed to check its transparent fields.
             glActiveTexture(GL_TEXTURE3);
             glBindTexture(GL_TEXTURE_2D, bowlTexture);
             glActiveTexture(GL_TEXTURE0);
@@ -1599,14 +1556,14 @@ int main()
             drawSprite(fridgeClosedTexture,  closedSpriteX, fridgeSpriteY, closedSpriteWidth, closedSpriteHeight, scaleLocation, offsetLocation);
         }
 
-		//рисуем струю молока, если пакет над миской и наливание началось
+		//draw a stream of milk if the bag is above the bowl and the pouring has begun
         if (pouringMilk && roomLightOn)
         {
-            // Носик повёрнутого пакета.
+            //the spout of a turned package
             float spoutX = milkX + milkSpoutV * milkHeight;
             float spoutY = milkY + (1.0f - milkSpoutU) * milkWidth;
 
-            // Та же высота поверхности, что используется в basic.frag.
+            //the same surface height as used in basic.frag
             float level = 0.45f + (0.72f - 0.45f) * bowlFill;
             float surfaceY = bowlY + (1.0f - level) * bowlHeight;
 
@@ -1631,31 +1588,18 @@ int main()
                     streamHeight / bowlHeight
                 );
 
-                // Шейдер сам рисует струю; текстуру в этом режиме не читает.
-                drawSprite(
-                    milkTexture,
-                    streamX, spoutY,
-                    streamWidth, streamHeight,
-                    scaleLocation, offsetLocation
-                );
-
+                // milk sprites
+                drawSprite(milkTexture, streamX, spoutY, streamWidth, streamHeight, scaleLocation, offsetLocation);
                 glUniform1i(streamModeLocation, 0);
             }
         }
 
-        // Молоко видно на полке открытого холодильника или после извлечения.
+        //milk is visible on the shelf of an open refrigerator or after removal
         if (fridgeOpen || milkTaken)
         {
             glUniform1i(rotateMilkLocation, pouringMilk ? 1 : 0);
 
-            drawSprite(
-                milkTexture,
-                milkX, milkY,
-                pouringMilk ? milkHeight : milkWidth,
-                pouringMilk ? milkWidth : milkHeight,
-                scaleLocation, offsetLocation
-            );
-
+            drawSprite( milkTexture, milkX, milkY, pouringMilk ? milkHeight : milkWidth,pouringMilk ? milkWidth : milkHeight,scaleLocation, offsetLocation);
             glUniform1i(rotateMilkLocation, 0);
         }
 
@@ -1666,15 +1610,12 @@ int main()
             glUniform1i(heldCatLocation, 1);
             glUniform1f(catAngleLocation,catSwayAngle);
 
-            drawSprite(catHeldTexture,
-                catX, catY,
-                catWidth, catHeight,
-                scaleLocation, offsetLocation);
+            drawSprite(catHeldTexture,catX, catY, catWidth, catHeight, scaleLocation, offsetLocation);
             glUniform1i(heldCatLocation, 0);
         }
 
         
-		// Рисуем тёмный оверлей, если свет в комнате выключен
+		// darck overlay
         if (!roomLightOn) {
 			glUniform1i(darkOverlayLocation, 1);
 			
@@ -1694,26 +1635,16 @@ int main()
 
         glUniform1i(solidModeLocation, 1);
 
-        // Тёмный цвет с непрозрачностью 60%.
+        // darck 60%.
         glUniform4f(solidColorLocation, 0.1f, 0.1f, 0.1f, 0.6f);
+        glUniform2f(scaleLocation, infoWidth / WINDOW_WIDTH,infoHeight / WINDOW_HEIGHT);
 
-        glUniform2f(
-            scaleLocation,
-            infoWidth / WINDOW_WIDTH,
-            infoHeight / WINDOW_HEIGHT
-        );
-
-        glUniform2f(
-            offsetLocation,
-            (2.0f * infoX + infoWidth) / WINDOW_WIDTH - 1.0f,
-            1.0f - (2.0f * infoY + infoHeight) / WINDOW_HEIGHT
-        );
-
+        glUniform2f(offsetLocation, (2.0f * infoX + infoWidth) / WINDOW_WIDTH - 1.0f, 1.0f - (2.0f * infoY + infoHeight) / WINDOW_HEIGHT);
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
         glUniform1i(solidModeLocation, 0);
 
-        //фон для посказок
+        //background for hints
         glUniform1i(solidModeLocation, 1);
         glUniform4f(solidColorLocation, 0.08f, 0.07f, 0.06f, 0.75f);
         drawSprite(backgroundTexture, 760.0f, 20.0f, 500.0f, 90.0f, scaleLocation,offsetLocation);

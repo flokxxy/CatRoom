@@ -42,13 +42,13 @@ void main(){
    if (uIsStream){
     float down = 1.0 - chTexCoord.y;
 
-    // Небольшое движение струи сверху вниз.
+    // Небольшое движение струи сверху вниз
     float center = 0.5 + 0.08 * down * sin(down * 16.0 - uPourTime * 18.0);
     float opacity = 1.0 - smoothstep(0.22, 0.48, abs(chTexCoord.x - center));
 
     vec2 bowlUV = uStreamBowlRect.xy + chTexCoord * uStreamBowlRect.zw;
 
-    // Передняя стенка миски должна перекрывать струю.
+    // Передняя стенка миски должна перекрывать струю
     if (bowlUV.x >= 0.0 && bowlUV.x <= 1.0 && bowlUV.y >= 0.0 && bowlUV.y <= 1.0){
         vec2 frontUV = bowlUV * vec2(1.0, 1.087) + vec2(0.0, -0.142);
 
@@ -64,34 +64,25 @@ void main(){
 
     if (uRotateMilk) textureUV = vec2(chTexCoord.y, 1.0 - chTexCoord.x);
 
-    if (uIsDrinkingCat)
-{
+    if (uIsDrinkingCat){
+
     // Правая верхняя часть картинки содержит голову.
     // Область лап остаётся неподвижной.
-    float headWeight =
-        smoothstep(0.50, 0.68, chTexCoord.x) *
-        smoothstep(0.11, 0.16, chTexCoord.y);
+    float headWeight = smoothstep(0.50, 0.68, chTexCoord.x) * smoothstep(0.11, 0.16, chTexCoord.y);
 
     textureUV.y += uCatHeadDrop * headWeight;
 }
 
 vec4 base = texture(uTexture, textureUV);
 
-if (uIsDrinkingCat)
-{
-    vec2 bowlUV =
-        uCatBowlRect.xy + chTexCoord * uCatBowlRect.zw;
+if (uIsDrinkingCat){
 
-    if (bowlUV.x >= 0.0 && bowlUV.x <= 1.0 &&
-        bowlUV.y >= 0.0 && bowlUV.y <= 1.0)
-    {
-        vec2 frontUV =
-            bowlUV * vec2(1.0, 1.087) + vec2(0.0, -0.142);
+    vec2 bowlUV = uCatBowlRect.xy + chTexCoord * uCatBowlRect.zw;
 
-        float front = smoothstep(
-            0.05, 0.95, texture(uFrontMask, frontUV).a
-        );
+    if (bowlUV.x >= 0.0 && bowlUV.x <= 1.0 && bowlUV.y >= 0.0 && bowlUV.y <= 1.0){
+        vec2 frontUV = bowlUV * vec2(1.0, 1.087) + vec2(0.0, -0.142);
 
+        float front = smoothstep( 0.05, 0.95, texture(uFrontMask, frontUV).a);
         float bowlAlpha = texture(uBowlTexture, bowlUV).a;
         base.a *= 1.0 - front * bowlAlpha;
     }
@@ -113,10 +104,8 @@ if (uIsDrinkingCat)
     float front = smoothstep(0.05,0.95, texture(uFrontMask, frontUV).a);
 
     float level = mix(0.45,0.72,clamp(uFill,0.0,1.0));
-    float belowLevel = 1.0 - smoothstep(level,level+0.004,chTexCoord.y);
+    float belowLevel = 1.0 - smoothstep(level, level+0.004, chTexCoord.y);
     float milkAmount = inside * (1.0 - front) * belowLevel;
     vec3 milkColor = vec3(0.96, 0.94, 0.87);
     outCol = vec4(mix(base.rgb,milkColor,milkAmount),base.a);
-
-
 }
