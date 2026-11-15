@@ -18,14 +18,14 @@ uniform vec2 uSceneSize;
 void main()
 {
     vec2 position = inPos * uScale + uOffset;
-    //тоже самое что xb+y
+    //same xb+y
 
 
-    //описание покачивания изображения кота
+    //description of the swaying image of a cat
     if (uIsHeldCat){
         vec2 pivot = vec2(2.0 * uCatPivot.x - 1.0, 1.0 -2.0*uCatPivot.y);
         vec2 relativePixels = (inPos - pivot) * uScale * uSceneSize*0.5;
-        //считаем поворот
+        //we count the turn
 
         float c = cos(uCatAngle);
         float s = sin(uCatAngle);

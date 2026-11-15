@@ -24,7 +24,7 @@ uniform float uPourTime;
 uniform bool uIsSolidColor;
 uniform vec4 uSolidColor;
 
-// Преобразование координат струи в координаты картинки миски
+//transforming the jet coordinates into the bowl image coordinates
 uniform vec4 uStreamBowlRect;
 
 void main(){
@@ -42,13 +42,13 @@ void main(){
    if (uIsStream){
     float down = 1.0 - chTexCoord.y;
 
-    // Небольшое движение струи сверху вниз
+    // small movement of the jet from top to bottom
     float center = 0.5 + 0.08 * down * sin(down * 16.0 - uPourTime * 18.0);
     float opacity = 1.0 - smoothstep(0.22, 0.48, abs(chTexCoord.x - center));
 
     vec2 bowlUV = uStreamBowlRect.xy + chTexCoord * uStreamBowlRect.zw;
 
-    // Передняя стенка миски должна перекрывать струю
+    // The front wall of the bowl blocks the stream
     if (bowlUV.x >= 0.0 && bowlUV.x <= 1.0 && bowlUV.y >= 0.0 && bowlUV.y <= 1.0){
         vec2 frontUV = bowlUV * vec2(1.0, 1.087) + vec2(0.0, -0.142);
 
@@ -66,8 +66,8 @@ void main(){
 
     if (uIsDrinkingCat){
 
-    // Правая верхняя часть картинки содержит голову.
-    // Область лап остаётся неподвижной.
+    // the head remains in place
+    // the paw area remains motionless
     float headWeight = smoothstep(0.50, 0.68, chTexCoord.x) * smoothstep(0.11, 0.16, chTexCoord.y);
 
     textureUV.y += uCatHeadDrop * headWeight;
@@ -96,7 +96,7 @@ if (uIsDrinkingCat){
         return;
     }
 
-    //совмещаем координаты текстуры с маской интерьера миски
+    //combine the texture coordinates with the bowl's interior mask
     vec2 interiorUV = chTexCoord*vec2(0.959, 1.15) + vec2(0.009, -0.099);
     vec2 frontUV = chTexCoord*vec2(1.0, 1.087) + vec2(0.0, -0.142);
 
