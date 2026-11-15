@@ -1,0 +1,478 @@
+{
+  "set": "CatRoom sprite set v2",
+  "created": "2026-11-06",
+  "generator": "built-in image_gen.imagegen",
+  "coordinate_system": {
+    "origin": "top_left",
+    "units": "normalized_to_full_png_canvas",
+    "rect_format": "[x0,y0,x1,y1]",
+    "point_format": "[x,y]"
+  },
+  "canvas": [
+    1254,
+    1254
+  ],
+  "common_ground_y": 0.936204,
+  "notes": [
+    "PNG alpha bounds are measured at alpha >128.",
+    "Ground anchors follow the lower cream paper outline, not a skeleton foot joint.",
+    "Head/body hitboxes and scruff anchors are initial visual estimates; validate during integration.",
+    "The drink tongue tip was measured near source pixel (941,925).",
+    "Held is airborne: ground_anchor is null.",
+    "Recommended offsets are metadata only; no C++/GLSL or game behavior was modified.",
+    "One frame per pose. Walking files indicate two directions of one stride."
+  ],
+  "sprites": [
+    {
+      "file": "cat_idle.png",
+      "label_ru": "Покой",
+      "facing": "front",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_px": [
+        282,
+        234,
+        939,
+        1174
+      ],
+      "alpha_bbox_norm": [
+        0.22488,
+        0.186603,
+        0.748804,
+        0.936204
+      ],
+      "ground_anchor": [
+        0.5,
+        0.936204
+      ],
+      "recommended_y_offset_at_height_310": 0,
+      "head_hitbox": [
+        0.22,
+        0.18,
+        0.75,
+        0.54
+      ],
+      "body_hitbox": [
+        0.29,
+        0.52,
+        0.73,
+        0.94
+      ],
+      "scruff_anchor": [
+        0.48,
+        0.53
+      ],
+      "sha256": "8f4e146ee6f87094b9e5298908e80aa9d78ccc1eb784d87e55d975c74d4cf896"
+    },
+    {
+      "file": "cat_walk_right.png",
+      "label_ru": "Ходьба вправо",
+      "facing": "right",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_px": [
+        143,
+        220,
+        1145,
+        1155
+      ],
+      "alpha_bbox_norm": [
+        0.114035,
+        0.175439,
+        0.913078,
+        0.921053
+      ],
+      "ground_anchor": [
+        0.5,
+        0.921053
+      ],
+      "recommended_y_offset_at_height_310": 4.69681,
+      "head_hitbox": [
+        0.43,
+        0.17,
+        0.92,
+        0.55
+      ],
+      "body_hitbox": [
+        0.16,
+        0.53,
+        0.81,
+        0.93
+      ],
+      "scruff_anchor": [
+        0.61,
+        0.53
+      ],
+      "sha256": "b7a61999cbbff63fd9a8d62eadeba23ac0b8b4365274f11f203db7ff0998af74"
+    },
+    {
+      "file": "cat_walk_left.png",
+      "label_ru": "Ходьба влево",
+      "facing": "left",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_px": [
+        118,
+        209,
+        1121,
+        1161
+      ],
+      "alpha_bbox_norm": [
+        0.094099,
+        0.166667,
+        0.893939,
+        0.925837
+      ],
+      "ground_anchor": [
+        0.5,
+        0.925837
+      ],
+      "recommended_y_offset_at_height_310": 3.21377,
+      "head_hitbox": [
+        0.09,
+        0.16,
+        0.58,
+        0.55
+      ],
+      "body_hitbox": [
+        0.2,
+        0.53,
+        0.9,
+        0.93
+      ],
+      "scruff_anchor": [
+        0.39,
+        0.53
+      ],
+      "sha256": "deefb8624fc9347483280391cc5567266e2b61dad952261ac97e93dcb5af4648"
+    },
+    {
+      "file": "cat_drink.png",
+      "label_ru": "Питьё",
+      "facing": "right",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_px": [
+        66,
+        354,
+        1194,
+        1153
+      ],
+      "alpha_bbox_norm": [
+        0.052632,
+        0.282297,
+        0.952153,
+        0.919458
+      ],
+      "ground_anchor": [
+        0.5,
+        0.919458
+      ],
+      "recommended_y_offset_at_height_310": 5.19126,
+      "head_hitbox": [
+        0.45,
+        0.28,
+        0.95,
+        0.75
+      ],
+      "body_hitbox": [
+        0.17,
+        0.49,
+        0.52,
+        0.93
+      ],
+      "scruff_anchor": [
+        0.55,
+        0.51
+      ],
+      "mouth_anchor": [
+        0.750399,
+        0.73764
+      ],
+      "mouth_anchor_accuracy": "measured approximate tongue tip",
+      "sha256": "cdc4cd0317273e1fd695dc88df5d81817b69b755cb32196390c64f743e03f13c"
+    },
+    {
+      "file": "cat_happy.png",
+      "label_ru": "Довольный кот",
+      "facing": "front",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_px": [
+        281,
+        234,
+        941,
+        1175
+      ],
+      "alpha_bbox_norm": [
+        0.224083,
+        0.186603,
+        0.750399,
+        0.937002
+      ],
+      "ground_anchor": [
+        0.5,
+        0.937002
+      ],
+      "recommended_y_offset_at_height_310": -0.24738,
+      "head_hitbox": [
+        0.22,
+        0.18,
+        0.75,
+        0.54
+      ],
+      "body_hitbox": [
+        0.29,
+        0.52,
+        0.73,
+        0.94
+      ],
+      "scruff_anchor": [
+        0.48,
+        0.53
+      ],
+      "sha256": "7f366e057e101d21093deddc9d158bfe9af7685c8bc34758f513424a2c6452e3"
+    },
+    {
+      "file": "cat_hiss.png",
+      "label_ru": "Шипение",
+      "facing": "front",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_px": [
+        280,
+        309,
+        971,
+        1174
+      ],
+      "alpha_bbox_norm": [
+        0.223285,
+        0.246411,
+        0.774322,
+        0.936204
+      ],
+      "ground_anchor": [
+        0.5,
+        0.936204
+      ],
+      "recommended_y_offset_at_height_310": 0,
+      "head_hitbox": [
+        0.22,
+        0.24,
+        0.78,
+        0.55
+      ],
+      "body_hitbox": [
+        0.29,
+        0.52,
+        0.75,
+        0.94
+      ],
+      "scruff_anchor": [
+        0.48,
+        0.53
+      ],
+      "sha256": "961e28a30b2aff39f817b7291d9dbfa0356d2240850824c3592467e60f0a4362"
+    },
+    {
+      "file": "cat_bite.png",
+      "label_ru": "Укус",
+      "facing": "front_left",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_px": [
+        189,
+        251,
+        930,
+        1174
+      ],
+      "alpha_bbox_norm": [
+        0.150718,
+        0.200159,
+        0.741627,
+        0.936204
+      ],
+      "ground_anchor": [
+        0.5,
+        0.936204
+      ],
+      "recommended_y_offset_at_height_310": 0,
+      "head_hitbox": [
+        0.15,
+        0.2,
+        0.75,
+        0.56
+      ],
+      "body_hitbox": [
+        0.28,
+        0.55,
+        0.62,
+        0.94
+      ],
+      "scruff_anchor": [
+        0.46,
+        0.54
+      ],
+      "sha256": "d2bfd6d0d43b68ac173a6415e4086ecdc52343b5fdd7c54d4811336e432ba8b2"
+    },
+    {
+      "file": "cat_held_scruff.png",
+      "label_ru": "Переноска за шкирку",
+      "facing": "front",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_px": [
+        283,
+        170,
+        914,
+        1174
+      ],
+      "alpha_bbox_norm": [
+        0.225678,
+        0.135566,
+        0.728868,
+        0.936204
+      ],
+      "ground_anchor": null,
+      "recommended_y_offset_at_height_310": null,
+      "head_hitbox": [
+        0.22,
+        0.13,
+        0.73,
+        0.48
+      ],
+      "body_hitbox": [
+        0.35,
+        0.44,
+        0.69,
+        0.94
+      ],
+      "scruff_anchor": [
+        0.503987,
+        0.453748
+      ],
+      "scruff_hitbox": [
+        0.46,
+        0.42,
+        0.54,
+        0.49
+      ],
+      "sha256": "22647efaf90518fd67439b77dcbb8c5da6ef3e60b9a1edb2dcaa6a04fc1fda5f"
+    },
+    {
+      "file": "cat_look_right.png",
+      "label_ru": "Взгляд вправо",
+      "facing": "right",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_px": [
+        320,
+        242,
+        915,
+        1174
+      ],
+      "alpha_bbox_norm": [
+        0.255183,
+        0.192982,
+        0.729665,
+        0.936204
+      ],
+      "ground_anchor": [
+        0.5,
+        0.936204
+      ],
+      "recommended_y_offset_at_height_310": 0.0,
+      "reference": "cat_idle.png",
+      "added": "2026-11-08",
+      "sha256": "69cb3862f97bc766cad7bf228c5d7fce93dbd58b9863a9416c67cfced8fbbd09"
+    },
+    {
+      "file": "cat_look_left.png",
+      "label_ru": "Взгляд влево",
+      "facing": "left",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "alpha_bbox_px": [
+        311,
+        217,
+        914,
+        1175
+      ],
+      "alpha_bbox_norm": [
+        0.248006,
+        0.173046,
+        0.728868,
+        0.937002
+      ],
+      "ground_anchor": [
+        0.5,
+        0.937002
+      ],
+      "recommended_y_offset_at_height_310": -0.24738,
+      "reference": "cat_idle.png",
+      "added": "2026-11-08",
+      "sha256": "124faf78318320924dde8fd5b6a44ededf5294fe34076d496bcae7e0e54297a2"
+    }
+  ],
+  "extended": "2026-11-08"
+}

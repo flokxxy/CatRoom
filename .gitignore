@@ -1,0 +1,25 @@
+# Visual Studio local settings and caches
+/.vs/
+*.vcxproj.user
+*.suo
+*.VC.db
+*.VC.opendb
+
+# Build outputs; anchored paths preserve external/freetype/lib/Debug and Release
+/x64/
+/Win32/
+/Debug/
+/Release/
+/CatRoom/x64/
+/CatRoom/Win32/
+/output/
+/out/
+
+# CMake build directories and local presets
+/build/
+/cmake-build-*/
+/CMakeUserPresets.json
+
+# Temporary files and duplicate sprite archives
+/tmp/
+/res/cat/cat_sprite_set_v2*.zip

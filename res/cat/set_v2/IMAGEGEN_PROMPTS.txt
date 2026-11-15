@@ -1,0 +1,104 @@
+CATROOM SPRITE SET V2 — IMAGEGEN PROMPTS
+
+Mode: built-in image_gen.imagegen, transparent_background=true.
+All assets generated individually, not cut out of a generated sheet.
+Original active game sprites and C++/GLSL were not edited.
+
+SELECTED OUTPUTS
+cat_idle.png
+C:\Users\vikto\.codex\generated_images\01a1893a-3bf3-74a2-a89d-6ba7f86a7a2e\exec-db8ac8a6-4cf8-42aa-8f3b-8eeb50837f0a.png
+
+cat_walk_right.png
+C:\Users\vikto\.codex\generated_images\01a1893a-3bf3-74a2-a89d-6ba7f86a7a2e\exec-9ea90c4d-f6c0-454a-8f11-f47dcb628533.png
+
+cat_walk_left.png
+C:\Users\vikto\.codex\generated_images\01a1893a-3bf3-74a2-a89d-6ba7f86a7a2e\exec-aa99e3f6-542d-442e-a7be-e0079ade6e08.png
+
+cat_drink.png
+C:\Users\vikto\.codex\generated_images\01a1893a-3bf3-74a2-a89d-6ba7f86a7a2e\exec-7476ed0e-c8fa-4ad9-affb-45b8ceea8f96.png
+
+cat_happy.png
+C:\Users\vikto\.codex\generated_images\01a1893a-3bf3-74a2-a89d-6ba7f86a7a2e\exec-4e1073d5-4136-4d9b-aca9-416d28448151.png
+
+cat_hiss.png
+C:\Users\vikto\.codex\generated_images\01a1893a-3bf3-74a2-a89d-6ba7f86a7a2e\exec-9fa25487-2463-465b-a3bc-07623536f9bc.png
+
+cat_bite.png
+C:\Users\vikto\.codex\generated_images\01a1893a-3bf3-74a2-a89d-6ba7f86a7a2e\exec-4be24b5b-b225-4930-8da9-ceeaaf4470ce.png
+
+cat_held_scruff.png
+C:\Users\vikto\.codex\generated_images\01a1893a-3bf3-74a2-a89d-6ba7f86a7a2e\exec-f512f8b2-7c7a-4002-ad66-0137e746e0fd.png
+
+PROMPTS (including the left-alpha correction)
+
+1. cat_idle.png
+Use case: identity-preserve
+Asset type: canonical CAT_IDLE sprite, first frame of a coherent character pose set for the CatRoom 2D game.
+Input image 1 is the ONLY character identity and visual style reference: the existing cat_idle.png. Create a clean higher-resolution version of this SAME CAT, not a new character.
+Identity invariants: slender gray charcoal patchwork-paper cat, the exact distinctive broad triangular head and large ears, golden yellow eyes with heavy black upper eyelids and dark pupils, mildly annoyed sleepy expression, small dusty-pink triangular nose, pink inner ears, pale cream muzzle/whiskers and rough cream cut-paper outline. Muted ochre/mustard paper patches on the fur. Preserve the layered torn-paper collage texture and restrained warm-gray palette. Match the original head-to-body ratio and thin long-legged personality, with coherent feline neck/shoulders, four plausible limbs and exactly one connected tail. Do not change to realistic fur, 3D, plush, anime, a kitten or a different breed.
+Pose: full-body seated idle, front/very slight three-quarter view matching the original, mouth closed, unimpressed but not hissing. Forepaws planted side by side; bent hind legs at the hips; single tail curls close to the cat's right side. No objects or effects.
+Registration: one SQUARE transparent canvas, ideally 1024x1024. Treat the original 310x310 canvas as the reference coordinate system. Keep the cat centered around x=0.50, with similar broad transparent side margins (visible silhouette approximately x=0.22..0.78). The opaque paw/ground baseline MUST be at y=0.96 of the full canvas, with 4% clear bottom margin. Ears around y=0.16..0.20. Preserve the full silhouette and whiskers; do not crop or zoom. This canonical canvas/character scale will be reused verbatim for the rest of the set.
+Backdrop: genuine fully transparent alpha outside the paper outline, clean antialiased silhouette, no glow, colored fringe or isolated stray pixels. No floor, shadow, room, bowl, food, milk, icons, hand, lettering, watermark or multiple views. Output ONE individual CAT_IDLE sprite only.
+
+2. cat_walk_right.png
+Use case: identity-preserve
+Asset type: CAT_WALK_RIGHT game sprite.
+Input image 1 is the CANONICAL character and canvas reference for a coherent CatRoom sprite set. Preserve this exact gray paper-collage cat's identity: broad angular large-eared head, golden yellow heavy-lidded eyes, black sketch lines, dusty pink nose/inner ears, cream muzzle and whiskers, sparse ochre patches, slender body and legs, rough cream torn-paper border. Match its head size, paper grain, palette and overall body mass; not a new breed, not plush/3D/photorealistic. Exactly one connected tail and four anatomically plausible cat limbs, no detached parts or extra paws.
+Canvas registration: same SQUARE canvas as image1, 1254x1254 if possible; preserve proportional registration if rendered larger. Ground-contact paw baseline at y=0.936 of canvas (source y~1174), clear transparent bottom margin. Keep the whole cat and whiskers visible; no cropping. All empty pixels genuinely transparent, clean antialiased edges, no colored fringe, isolated specks, backdrop, floor, shadow, text, watermark, props, icons or other cats. Output ONE individual pose, no sprite sheet.
+
+Pose: the same cat walking toward the RIGHT side of the screen, full body, clear right-facing side/three-quarter profile. Head on the RIGHT, hips and exactly one raised softly curled tail on the LEFT. The tail must attach to the pelvis. Keep its mildly annoyed half-lidded expression, mouth closed, eyes looking right. Natural feline walking stride: one foreleg reaches forward, opposite hind leg advances, other legs trail, four distinct plausible legs with cat paws and joints. At least one planted paw meets the shared baseline y=.936; lifted paws remain above it. Preserve the canonical head and body size, not an oversized head. Fit tail, ears and forward whiskers with transparent margins, silhouette roughly x=.12..90 and y=.18..936. No motion lines.
+
+3. cat_happy.png
+Use case: precise-object-edit
+Asset type: CAT_HAPPY game sprite.
+Input image 1 is the CANONICAL character and canvas reference for a coherent CatRoom sprite set. Preserve this exact gray paper-collage cat's identity: broad angular large-eared head, golden yellow heavy-lidded eyes, black sketch lines, dusty pink nose/inner ears, cream muzzle and whiskers, sparse ochre patches, slender body and legs, rough cream torn-paper border. Match its head size, paper grain, palette and overall body mass; not a new breed, not plush/3D/photorealistic. Exactly one connected tail and four anatomically plausible cat limbs, no detached parts or extra paws.
+Canvas registration: same SQUARE canvas as image1, 1254x1254 if possible; preserve proportional registration if rendered larger. Ground-contact paw baseline at y=0.936 of canvas (source y~1174), clear transparent bottom margin. Keep the whole cat and whiskers visible; no cropping. All empty pixels genuinely transparent, clean antialiased edges, no colored fringe, isolated specks, backdrop, floor, shadow, text, watermark, props, icons or other cats. Output ONE individual pose, no sprite sheet.
+
+Edit the canonical seated idle pose by changing ONLY its expression into contentment after drinking milk: relaxed closed crescent eyes with the same eye placement, a tiny natural pleased cat smile, relaxed ears. The SAME cat, not a kitten or a new mascot. Keep the entire head silhouette, muzzle, nose, all four paws, shoulders, seated torso, single curled tail, character scale, ground anchor and transparent margins in the SAME positions as image1. No hearts or blush marks baked into this sprite; effects are drawn separately. No other pose changes.
+
+4. cat_hiss.png
+Use case: precise-object-edit
+Asset type: CAT_HISS game sprite.
+Input image 1 is the CANONICAL character and canvas reference for a coherent CatRoom sprite set. Preserve this exact gray paper-collage cat's identity: broad angular large-eared head, golden yellow heavy-lidded eyes, black sketch lines, dusty pink nose/inner ears, cream muzzle and whiskers, sparse ochre patches, slender body and legs, rough cream torn-paper border. Match its head size, paper grain, palette and overall body mass; not a new breed, not plush/3D/photorealistic. Exactly one connected tail and four anatomically plausible cat limbs, no detached parts or extra paws.
+Canvas registration: same SQUARE canvas as image1, 1254x1254 if possible; preserve proportional registration if rendered larger. Ground-contact paw baseline at y=0.936 of canvas (source y~1174), clear transparent bottom margin. Keep the whole cat and whiskers visible; no cropping. All empty pixels genuinely transparent, clean antialiased edges, no colored fringe, isolated specks, backdrop, floor, shadow, text, watermark, props, icons or other cats. Output ONE individual pose, no sprite sheet.
+
+Pose/expression: the canonical seated cat gives a defensive hiss, head mostly front-facing with a slight left turn. Ears angle backward, eyes narrow angrily, cheek/chest fur slightly raised. Open the mouth naturally beneath the pink nose: coherent jaw hinge, connected lower jaw/chin, dark mouth, tiny pink tongue and two small correctly placed upper feline fangs with small lower canines. No cheek-hole mouth or dangling detached jaw. Keep a natural connected head-neck-shoulders-chest structure while preserving the canonical slender proportions. All paws and hips stay seated at the same positions and shared baseline as image1. Exactly ONE tail, in the same right-side curled position, modestly bristled. Do not add a second tail, large new chest patch, extra legs, anger symbol or motion effects. Keep the head size and ground line consistent with the canonical idle.
+
+5. cat_walk_left.png
+Use case: precise-object-edit
+Asset type: CAT_WALK_LEFT game sprite.
+Input image 1 is the ONLY edit target, the approved RIGHT-facing walking sprite from our coherent character set. Make ONLY a horizontal mirror reflection of the ENTIRE image about the vertical center of its existing square canvas. The head must now be on the LEFT looking LEFT, hips and the single curled tail on the RIGHT. Mirror all four legs, paws, ears, whiskers, fur patches and paper textures together, preserving the stride and proportions. No redesign, repainting, added limbs, changes of expression, cropping, resizing or recentering. Keep exactly the same transparent canvas dimensions (1254x1254), the same vertical placement and paw-ground line. Genuine fully transparent background, clean alpha edges, no scene, icons, props, lettering or other cats. Output ONE individual LEFT-facing sprite only.
+
+6. cat_drink.png
+Use case: identity-preserve
+Asset type: CAT_DRINK game sprite, facing RIGHT, WITHOUT an embedded bowl.
+Input image 1 is the CANONICAL character and canvas reference for a coherent CatRoom sprite set. Preserve this exact gray paper-collage cat's identity: broad angular large-eared head, golden yellow heavy-lidded eyes, black sketch lines, dusty pink nose/inner ears, cream muzzle and whiskers, sparse ochre patches, slender body and legs, rough cream torn-paper border. Match its head size, paper grain, palette and overall body mass; not a new breed, not plush/3D/photorealistic. Exactly one connected tail and four anatomically plausible cat limbs, no detached parts or extra paws.
+Canvas registration: same SQUARE canvas as image1, 1254x1254 if possible; preserve proportional registration if rendered larger. Ground-contact paw baseline at y=0.936 of canvas (source y~1174), clear transparent bottom margin. Keep the whole cat and whiskers visible; no cropping. All empty pixels genuinely transparent, clean antialiased edges, no colored fringe, isolated specks, backdrop, floor, shadow, text, watermark, props, icons or other cats. Output ONE individual pose, no sprite sheet.
+
+Pose: the same slender cat stands/crouches to the LEFT of an invisible pet bowl and lowers its head to the RIGHT to lap milk. The head remains above paw level, eyes gently closed, tiny pink tongue extended downward-right. Four coherent feline limbs with planted paws, naturally bent neck connecting head to shoulders; exactly one curled tail on the LEFT behind the pelvis. Do not inflate the torso or shorten the character into a kitten. Preserve the canonical head scale and muzzle/ear shapes even with closed eyes.
+Important practical registration: ground-contact paws at y=.936. Tongue tip/mouth contact at approximately x=.78,y=.74 of the full square canvas, noticeably ABOVE the ground by about 20% of canvas height. Imagine a raised pet-bowl rim at tongue height, but draw NO BOWL. Keep a clean transparent gap beneath the lowered muzzle and whiskers; do not draw the head licking the floor. Entire cat inside x=.10..92, with full ears/tail/paws. No bowl, dish, milk, drops, stream, hearts, floor or hand.
+
+7. cat_bite.png
+Use case: identity-preserve
+Asset type: CAT_BITE game sprite.
+Input image 1 is the CANONICAL character and canvas reference for a coherent CatRoom sprite set. Preserve this exact gray paper-collage cat's identity: broad angular large-eared head, golden yellow heavy-lidded eyes, black sketch lines, dusty pink nose/inner ears, cream muzzle and whiskers, sparse ochre patches, slender body and legs, rough cream torn-paper border. Match its head size, paper grain, palette and overall body mass; not a new breed, not plush/3D/photorealistic. Exactly one connected tail and four anatomically plausible cat limbs, no detached parts or extra paws.
+Canvas registration: same SQUARE canvas as image1, 1254x1254 if possible; preserve proportional registration if rendered larger. Ground-contact paw baseline at y=0.936 of canvas (source y~1174), clear transparent bottom margin. Keep the whole cat and whiskers visible; no cropping. All empty pixels genuinely transparent, clean antialiased edges, no colored fringe, isolated specks, backdrop, floor, shadow, text, watermark, props, icons or other cats. Output ONE individual pose, no sprite sheet.
+
+Pose/expression: a clear quick defensive nip/snapping reaction toward the viewer, with a slight LEFTward lean, from the canonical seated position. Head thrust slightly forward and tilted, ears angled back, angry narrowed golden eyes, mouth partway open with a connected lower jaw and two small cat canines. This should read as a short nip, distinct from the wider stationary hiss. One forepaw may be lifted defensively near the chest, the other forepaw and bent hind paws keep the seated support line y=.936. Four limbs total, exactly one tail curled to the right, all body joints readable and natural. Maintain the SAME head size, torso mass, canonical paper texture and character markings. No red anger icon, motion lines, human hand, victim, blood, wounds or extra objects.
+
+8. cat_held_scruff.png
+Use case: identity-preserve
+Asset type: CAT_HELD_SCRUFF, a calm lifted/carried pose for the same fictional paper-collage game cat.
+Input image 1 is the CANONICAL character and canvas reference for a coherent CatRoom sprite set. Preserve this exact gray paper-collage cat's identity: broad angular large-eared head, golden yellow heavy-lidded eyes, black sketch lines, dusty pink nose/inner ears, cream muzzle and whiskers, sparse ochre patches, slender body and legs, rough cream torn-paper border. Match its head size, paper grain, palette and overall body mass; not a new breed, not plush/3D/photorealistic. Exactly one connected tail and four anatomically plausible cat limbs, no detached parts or extra paws.
+Canvas registration: same SQUARE canvas as image1, 1254x1254 if possible; preserve proportional registration if rendered larger. Ground-contact paw baseline at y=0.936 of canvas (source y~1174), clear transparent bottom margin. Keep the whole cat and whiskers visible; no cropping. All empty pixels genuinely transparent, clean antialiased edges, no colored fringe, isolated specks, backdrop, floor, shadow, text, watermark, props, icons or other cats. Output ONE individual pose, no sprite sheet.
+
+Pose: the cat is suspended from a small gathered fold of fur at the back of its neck (scruff/nape), just behind the ears. No hand is drawn: the game's cursor will be attached to that point. Make this grasp point legible near upper neck/back, around x=.48,y=.40 of the canvas, as a modest natural pinched fur fold, not a handle, hook or rope. Head remains at its canonical large scale, front/slight three-quarter view, relaxed mildly amused closed/half-lidded eyes and gentle cat mouth, showing this is the friendly post-milk state.
+The slender body hangs vertically under the scruff under gravity, shoulders/hips coherent, all FOUR legs visible and relaxed/dangling with loose curled cat paws, hind feet hanging lower, exactly ONE connected tail drooping and curving beside the body. Preserve feline proportions, no human arms/hands, no extra or disconnected limbs, no elongated rubber anatomy. Keep the full cat inside the square canvas with transparent margins, ears near y=.15 and dangling paws around y=.92..96. This AIRBORNE pose has no floor-contact anchor: do not pose the paws as planted or add a ground line. No human hand, arm, claw, clothes, collar, rope, bowl, room, shadow, motion lines or effects. One calm intact character only.
+
+9. cat_walk_left.png (alpha cleanup)
+Use case: background-extraction
+Asset type: CLEAN transparent CAT_WALK_LEFT sprite.
+Input image 1 is the ONLY edit target. The cat illustration, pose and horizontal mirroring are approved. Change ONLY the alpha/background outside the cat.
+Completely REMOVE the pale white/gray cloudy halo and drop-shadow-like matte around the figure, including all space between legs, inside the tail curve and around whiskers. Every pixel outside the narrow cream torn-paper cutout outline must have alpha EXACTLY ZERO. Preserve only the actual cat and its cream paper border. Do not keep a soft white glow or translucent cloudy backdrop. Clean antialiased edge, not an opaque rectangle, not a checkerboard.
+Keep the EXACT original 1254x1254 square canvas and cat position/size. Preserve all internal paper grain, markings, heavy-lidded yellow eyes, pink nose/ears, four legs, single tail, left-facing direction and stride. Do not repaint, change pose, crop, zoom, recenter or add anything. Background extraction ONLY. Output ONE transparent PNG.
+

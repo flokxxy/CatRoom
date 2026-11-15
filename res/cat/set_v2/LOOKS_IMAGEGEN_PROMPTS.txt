@@ -1,0 +1,33 @@
+CATROOM SET V2 — TWO LOOK VARIANTS
+Added: 2026-11-08.
+Mode: built-in image_gen.imagegen; transparent_background=true.
+Reference/edit target: res/cat/set_v2/cat_idle.png.
+These two additions do not modify Main.cpp, shaders, or the original eight PNG files.
+
+SELECTED OUTPUTS
+cat_look_right.png
+C:\Users\vikto\.codex\generated_images\01a1893a-3bf3-74a2-a89d-6ba7f86a7a2e\exec-ca78f66e-651f-48b0-854a-44ca59b0be23.png
+
+cat_look_left.png
+C:\Users\vikto\.codex\generated_images\01a1893a-3bf3-74a2-a89d-6ba7f86a7a2e\exec-3d6f6bb4-bb33-4d9d-bae5-80ae40ac4bda.png
+
+1. cat_look_right.png
+Use case: identity-preserve.
+Asset type: one individual seated-cat reaction sprite for the existing CatRoom 2D sprite set.
+Input image 1 is the EDIT TARGET and the exact character, pose, style, scale and registration reference.
+Edit only the head orientation and gaze. Keep the seated body, chest, slender neck, paws, hind legs and the single curled tail on the viewer's RIGHT side unchanged in shape, position, markings and texture. Preserve this very same mature, slender grey charcoal patchwork-paper cat, large triangular ears, broad head, golden half-lidded eyes, dusty pink nose and inner ears, cream muzzle and irregular cream torn-paper outline, and asymmetric mustard paper patches. Preserve the subdued mildly annoyed personality and closed mouth.
+Keep the reference's torn-paper collage material, muted palette, lighting, character proportions and detail. This is a matching pose variation, not a redesigned cat.
+Registration: one SQUARE 1254 x 1254 transparent RGBA canvas. Preserve the reference's framing and scale and exact planted-paw positions. Feet/cream outline at about y=1174 of 1254 (normalized ground 0.936204); do not move or rescale the body. Maintain the same transparent margins. Entire ears, whiskers, body, paws and tail must fit, nothing cropped.
+Backdrop: genuinely transparent alpha outside the paper silhouette. No room, floor, shadow, glow, lettering, icons, emotion symbols, bowl, milk, additional objects, hands, duplicate characters, panels or sprite sheet.
+Requested change: the seated body still faces the viewer, while ONLY the head turns naturally about 35–45 degrees toward SCREEN RIGHT (the right edge of the picture, positive X). The nose and muzzle clearly point RIGHT, and the eyes look RIGHT. Show a coherent three-quarter feline head attached naturally to the neck, both ears, one nearer eye and the other plausibly foreshortened. Keep the reference's head size and anatomical clarity. Do not turn the torso and do not mirror or relocate the tail. Output ONE right-looking cat sprite only.
+
+2. cat_look_left.png
+Use case: identity-preserve.
+Asset type: one individual seated-cat reaction sprite for the existing CatRoom 2D sprite set.
+Input image 1 is the EDIT TARGET and the exact character, pose, style, scale and registration reference.
+Edit only the head orientation and gaze. Keep the seated body, chest, slender neck, paws, hind legs and the single curled tail on the viewer's RIGHT side unchanged in shape, position, markings and texture. Preserve this very same mature, slender grey charcoal patchwork-paper cat, large triangular ears, broad head, golden half-lidded eyes, dusty pink nose and inner ears, cream muzzle and irregular cream torn-paper outline, and asymmetric mustard paper patches. Preserve the subdued mildly annoyed personality and closed mouth.
+Keep the reference's torn-paper collage material, muted palette, lighting, character proportions and detail. This is a matching pose variation, not a redesigned cat.
+Registration: one SQUARE 1254 x 1254 transparent RGBA canvas. Preserve the reference's framing and scale and exact planted-paw positions. Feet/cream outline at about y=1174 of 1254 (normalized ground 0.936204); do not move or rescale the body. Maintain the same transparent margins. Entire ears, whiskers, body, paws and tail must fit, nothing cropped.
+Backdrop: genuinely transparent alpha outside the paper silhouette. No room, floor, shadow, glow, lettering, icons, emotion symbols, bowl, milk, additional objects, hands, duplicate characters, panels or sprite sheet.
+Requested change: the seated body still faces the viewer, while ONLY the head turns naturally about 35–45 degrees toward SCREEN LEFT (the left edge of the picture, negative X). The nose and muzzle clearly point LEFT, and the eyes look LEFT. Show a coherent three-quarter feline head attached naturally to the neck, both ears, one nearer eye and the other plausibly foreshortened. Keep the reference's head size and anatomical clarity. Do not turn the torso and do not mirror the whole cat or relocate the tail; the tail remains on the viewer's RIGHT exactly as in the input. Output ONE left-looking cat sprite only.
+
